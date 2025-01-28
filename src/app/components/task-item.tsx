@@ -1,6 +1,9 @@
 "use client";
 
-import { Pencil, Trash2 } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
+import { Loader2, Pencil, Trash2 } from "lucide-react";
+import { queryClient } from "../libs/tanstack-query";
+import { deleteTask } from "../services";
 import { TaskType } from "../types/task-type";
 import { Button } from "./ui/button";
 
@@ -9,6 +12,17 @@ interface TaskItemProps {
 }
 
 const TaskItem = ({ task }: TaskItemProps) => {
+  const { mutate: del, isPending: pendingDeleteTask } = useMutation({
+    mutationFn: deleteTask,
+    onSuccess: () => {
+      queryClient?.invalidateQueries({ queryKey: ["tasks"] });
+    },
+  });
+
+  const handleDeleteUser = (task: TaskType) => {
+    del({ taskId: task?.id });
+  };
+
   return (
     <div className="flex flex-row items-center justify-between w-full h-14 bg-gray-100 rounded-md border p-4">
       <p>{task?.name}</p>
@@ -24,10 +38,14 @@ const TaskItem = ({ task }: TaskItemProps) => {
         <Button
           type="button"
           className="max-w-10 bg-red-700 hover:bg-red-600"
-          disabled={false}
-          onClick={() => null}
+          disabled={pendingDeleteTask}
+          onClick={() => handleDeleteUser(task)}
         >
-          <Trash2 />
+          {pendingDeleteTask ? (
+            <Loader2 className="animate-spin" />
+          ) : (
+            <Trash2 />
+          )}
         </Button>
       </div>
     </div>
