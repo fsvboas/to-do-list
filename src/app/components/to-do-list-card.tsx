@@ -17,11 +17,13 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Input } from "./ui/input";
+import { SkeletonPlaceholder } from "./ui/skeleton-placeholder";
+import { Show } from "./utils/show";
 
 const ToDoListCard = () => {
   const [value, setValue] = useState<string>("");
 
-  const { data } = useQuery({
+  const { data, isPending: pendingGetTasks } = useQuery({
     queryFn: () => getTasks(),
     queryKey: ["tasks"],
   });
@@ -46,6 +48,10 @@ const ToDoListCard = () => {
   };
 
   const uniqueId = Date.now().toString();
+
+  const listPlaceholder = Array.from({ length: 5 }, (_, index) => (
+    <SkeletonPlaceholder key={index} className="w-full h-14" />
+  ));
 
   return (
     <Card className="w-[400px]">
@@ -74,9 +80,11 @@ const ToDoListCard = () => {
       </CardContent>
       <CardFooter>
         <div className="flex flex-col w-full space-y-2">
-          {tasks.map((item, index) => (
-            <TaskItem key={index} task={item} />
-          ))}
+          <Show when={!pendingGetTasks} fallback={listPlaceholder}>
+            {tasks.map((item, index) => (
+              <TaskItem key={index} task={item} />
+            ))}
+          </Show>
         </div>
       </CardFooter>
     </Card>
