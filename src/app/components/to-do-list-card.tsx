@@ -54,7 +54,7 @@ const ToDoListCard = () => {
   ));
 
   return (
-    <Card className="w-[400px]">
+    <Card className="w-full max-w-[400px]">
       <CardHeader>
         <CardTitle>To-Do List</CardTitle>
         <CardDescription>Create, update and delete your tasks</CardDescription>
