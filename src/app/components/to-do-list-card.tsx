@@ -67,6 +67,7 @@ const ToDoListCard = () => {
             disabled={pendingPostTask}
             value={value}
             onChange={handleChange}
+            maxLength={30}
           />
           <Button
             type="submit"

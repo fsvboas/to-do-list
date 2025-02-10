@@ -67,6 +67,7 @@ const TaskItem = ({ task }: TaskItemProps) => {
               disabled={pendingUpdateTask}
               value={value}
               onChange={handleChangeInputValue}
+              maxLength={30}
               className="max-w-[69%] border-none focus:!ring-0 shadow-none !text-base pl-0"
             />
             <div className="flex flex-row space-x-2">
