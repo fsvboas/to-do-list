@@ -98,7 +98,7 @@ const TaskItem = ({ task }: TaskItemProps) => {
           <Button
             type="button"
             className="max-w-10 bg-gray-300 hover:bg-gray-200"
-            disabled={false}
+            disabled={pendingDeleteTask}
             onClick={() => setIsEdittingTaskItem(true)}
           >
             <Pencil className="text-black" />
