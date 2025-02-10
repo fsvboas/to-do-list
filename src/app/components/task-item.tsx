@@ -56,7 +56,7 @@ const TaskItem = ({ task }: TaskItemProps) => {
   }, [isEdittingTaskItem]);
 
   return (
-    <div className="flex flex-row items-center justify-between w-full h-14 bg-gray-100 rounded-md border p-4">
+    <div className="flex flex-row items-center justify-between w-full h-14 bg-gray-100 rounded-md border p-4 ">
       <Show
         when={!isEdittingTaskItem}
         fallback={
@@ -93,7 +93,7 @@ const TaskItem = ({ task }: TaskItemProps) => {
           </div>
         }
       >
-        <p>{task?.name}</p>
+        <p className="max-w-[69%] overflow-hidden">{task?.name}</p>
         <div className="flex flex-row space-x-2">
           <Button
             type="button"
