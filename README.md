@@ -2,9 +2,7 @@
    To-Do List
 </h1>
 
-<h2 align='center'>
-    <img src="public/preview.png">
-</h2>
+<img src="public/preview.png">
 
 ## 🧾 Sobre
 
